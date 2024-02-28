@@ -4,13 +4,17 @@
   height: 100vh;
   max-height: 100vh;
   align-items: stretch;
+  gap:20px;
   .column {
     display: flex;
     flex-direction: column;
     padding:20px;
-    height: 100%;
-    overflow-y: scroll;
+    height: calc(100% - 80px);
+    overflow-y: auto;
     flex: 1;
+    margin-top:20px;
+    background: white;
+    border-radius: 10px;
     .ticket {
       width:calc(100% - 20px);
       height: 50px;
@@ -18,13 +22,13 @@
       border-radius: 8px;
       background: #F3F3F3;
       padding:10px;
-      &[data-status="status-0"] {
+      &[data-status="0"] {
         background: #F3F3F3;
       }
-      &[data-status="status-1"] {
+      &[data-status="1"] {
         background: coral;
       }
-      &[data-status="status-2"] {
+      &[data-status="2"] {
         background: yellowgreen;
       }
     }

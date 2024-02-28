@@ -24,19 +24,13 @@ export default class extends Controller {
         dropzone.style.border='none'
 
         droppedElement.setAttribute('data-status', dropzone.dataset.status)
-
+        console.log('status', droppedElement.status())
         e.stopPropagation()
         return false
     }
 
     onDragLeave(e) {
         e.currentTarget.style.border='none'
-    }
-
-    drag(e) {
-        console.log('drag')
-        e.dataTransfer.effectAllowed = 'move'
-        e.dataTransfer.setData("text", e.target.id);
     }
 
     allowDrop(e) {
