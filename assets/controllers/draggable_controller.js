@@ -24,7 +24,8 @@ export default class extends Controller {
         dropzone.style.border='none'
 
         droppedElement.setAttribute('data-status', dropzone.dataset.status)
-        console.log('status', droppedElement.status())
+        droppedElement.setAttribute('progression', 0)
+        droppedElement.dataset.stade = 'start'
         e.stopPropagation()
         return false
     }

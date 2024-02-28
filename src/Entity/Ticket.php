@@ -3,10 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\TicketRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\UX\Turbo\Attribute\Broadcast;
 
 #[ORM\Entity(repositoryClass: TicketRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 #[Broadcast]
 class Ticket
 {
@@ -28,6 +30,15 @@ class Ticket
 
     #[ORM\ManyToOne]
     private ?User $developer = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $progression = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $updatedAt = null;
+
+    #[ORM\Column]
+    private ?int $showOrder = null;
 
     public function getId(): ?int
     {
@@ -66,6 +77,54 @@ class Ticket
     public function setDeveloper(?User $developer): static
     {
         $this->developer = $developer;
+
+        return $this;
+    }
+
+    public function getProgression(): ?int
+    {
+        return $this->progression;
+    }
+
+    public function setProgression(?int $progression): static
+    {
+        $this->progression = $progression;
+
+        return $this;
+    }
+
+    public function getStade()
+    {
+        if(!$this->progression || $this->progression === 0) {
+            return 'start';
+        }
+        if ($this->progression >= 30 && $this->progression < 60) {
+            return 'half';
+        }
+        return 'end';
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    #[ORM\PreUpdate]
+    public function setUpdatedAt(): static
+    {
+        $this->updatedAt = new \DateTime();
+
+        return $this;
+    }
+
+    public function getShowOrder(): ?int
+    {
+        return $this->showOrder;
+    }
+
+    public function setShowOrder(int $showOrder): static
+    {
+        $this->showOrder = $showOrder;
 
         return $this;
     }

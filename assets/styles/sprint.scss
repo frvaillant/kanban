@@ -1,10 +1,12 @@
 .sprint {
   display: flex;
-  width: 100%;
+  width: calc(100vw - 40px);
+  max-width: calc(100vw - 40px);
   height: 100vh;
   max-height: 100vh;
   align-items: stretch;
   gap:20px;
+  padding:20px;
   .column {
     display: flex;
     flex-direction: column;
@@ -12,7 +14,6 @@
     height: calc(100% - 80px);
     overflow-y: auto;
     flex: 1;
-    margin-top:20px;
     background: white;
     border-radius: 10px;
     .ticket {
@@ -26,10 +27,34 @@
         background: #F3F3F3;
       }
       &[data-status="1"] {
-        background: coral;
+        background: #B0413E;
+        &[data-stade="half"] {
+          background: darkorange;
+        }
+        &[data-stade="end"] {
+          background: gold;
+        }
       }
       &[data-status="2"] {
         background: yellowgreen;
+      }
+
+      progress-bar {
+        display: flex;
+        height: 15px;
+        width:100%;
+        background: black;
+        border-radius: 200px;
+        position:relative;
+        .progression {
+          display: block;
+          background: white;
+          position: absolute;
+          top:3px;
+          left:3px;
+          border-radius: 200px;
+          height: 9px;
+        }
       }
     }
   }

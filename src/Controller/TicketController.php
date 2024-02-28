@@ -26,6 +26,9 @@ class TicketController extends AbstractController
     #[Route('/update/{id}/{param}/{value}', methods: ['POST'])]
     public function update(Ticket $ticket, string $param, $value, EntityManagerInterface $manager)
     {
+        if($value === 'null') {
+            $value = null;
+        }
         $setter = 'set' . ucfirst($param);
         $ticket->{$setter}($value);
         $manager->flush();

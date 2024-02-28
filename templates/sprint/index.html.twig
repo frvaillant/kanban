@@ -34,11 +34,15 @@
             </div>
             {% for ticket in todo %}
                 <app-ticket
+                    ticket="{{ ticket.id }}"
                     id="ticket-{{ ticket.id }}"
                     class="ticket todo"
                     data-id="{{ ticket.id }}"
                     data-status="{{ ticket.status }}"
+                    data-="{{ ticket.status }}"
                     draggable="true"
+                    progression="0"
+                    data-stade="start"
                 >
                     {{ ticket.name }}
                 </app-ticket>
@@ -56,13 +60,18 @@
             </div>
             {% for ticket in in_progress %}
                 <app-ticket
+                        ticket="{{ ticket.id }}"
                         id="ticket-{{ ticket.id }}"
                         class="ticket in_progress"
                         data-id="{{ ticket.id }}"
                         draggable="true"
                         data-status="{{ ticket.status }}"
+                        status="{{ ticket.status }}"
+                        progression="{{ ticket.progression }}"
+                        data-stade="{{ ticket.stade }}"
                 >
                     {{ ticket.name }}  {{ ticket.developer ? ticket.developer.name : '' }}
+                    <progress-bar ticket="{{ ticket.id }}" data-progression="{{ ticket.progression ?? 0 }}"></progress-bar>
                 </app-ticket>
             {% endfor %}
         </div>
@@ -75,17 +84,19 @@
         >
             <div
                 class="column-name"
-
             >
                 Done
             </div>
             {% for ticket in done %}
                 <app-ticket
+                        ticket="{{ ticket.id }}"
                         id="ticket-{{ ticket.id }}"
                         class="ticket done"
                         data-id="{{ ticket.id }}"
                         draggable="true"
                         data-status="{{ ticket.status }}"
+                        status="{{ ticket.status }}"
+                        progression="100"
                 >
                     {{ ticket.name }} {{ ticket.developer ? ticket.developer.name : '' }}
                 </app-ticket>
