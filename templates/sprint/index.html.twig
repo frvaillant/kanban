@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SprintController!{% endblock %}
+
+{% block body %}
+
+
+    <div class="sprint">
+
+        <div class="column devs">
+            <div class="column-name">
+                Developpeurs
+            </div>
+            {% for developer in users %}
+                <div class="dev">
+                    {{ developer.name }} : <turbo-frame id="dev_{{ developer.id }}_doing">{{ developer | tickets_doing_count }}</turbo-frame>
+                </div>
+
+            {% endfor %}
+        </div>
+
+
+        <div
+                class="column todo"
+                id="todo"
+                data-status="0"
+                data-controller="draggable"
+                data-action="dragover->draggable#allowDrop drop->draggable#ondrop dragleave->draggable#onDragLeave"
+        >
+            <div
+                class="column-name"
+            >
+                Todo
+            </div>
+            {% for ticket in todo %}
+                <app-ticket
+                    id="ticket-{{ ticket.id }}"
+                    class="ticket todo"
+                    data-id="{{ ticket.id }}"
+                    data-status="{{ ticket.status }}"
+                    draggable="true"
+                >
+                    {{ ticket.name }}
+                </app-ticket>
+            {% endfor %}
+        </div>
+        <div
+                class="column in-progress"
+                id="in-progress"
+                data-status="1"
+                data-controller="draggable"
+                data-action="dragover->draggable#allowDrop drop->draggable#ondrop dragleave->draggable#onDragLeave"
+        >
+            <div class="column-name">
+                In-Progress
+            </div>
+            {% for ticket in in_progress %}
+                <app-ticket
+                        id="ticket-{{ ticket.id }}"
+                        class="ticket in_progress"
+                        data-id="{{ ticket.id }}"
+                        draggable="true"
+                        data-status="{{ ticket.status }}"
+                >
+                    {{ ticket.name }}  {{ ticket.developer ? ticket.developer.name : '' }}
+                </app-ticket>
+            {% endfor %}
+        </div>
+        <div
+                class="column done"
+                id="done"
+                data-controller="draggable"
+                data-status="2"
+                data-action="dragover->draggable#allowDrop drop->draggable#ondrop dragleave->draggable#onDragLeave"
+        >
+            <div
+                class="column-name"
+
+            >
+                Done
+            </div>
+            {% for ticket in done %}
+                <app-ticket
+                        id="ticket-{{ ticket.id }}"
+                        class="ticket done"
+                        data-id="{{ ticket.id }}"
+                        draggable="true"
+                        data-status="{{ ticket.status }}"
+                >
+                    {{ ticket.name }} {{ ticket.developer ? ticket.developer.name : '' }}
+                </app-ticket>
+            {% endfor %}
+        </div>
+
+    </div>
+
+{% endblock %}
