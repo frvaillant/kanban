@@ -22,6 +22,7 @@ class SprintController extends AbstractController
             $inProgress = $ticketRepository->findBy(['status' => Ticket::STATUS_IN_PROGRESS, 'developer' => $user], ['name' => 'ASC']);
             $tickets[$user->getName()] = $inProgress;
         }
+
         return $this->render('sprint/index.html.twig', [
             'todo' => $todo,
             'tickets' => $tickets,

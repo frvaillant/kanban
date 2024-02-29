@@ -2,79 +2,97 @@ import ProgressBar from "./ProgressBar";
 
 export default class Ticket extends HTMLElement {
 
-    static observedAttributes = ["data-status", "status", "progression"];
+    static observedAttributes = ["data-status", "status", "progression", "developer", "dev"];
     constructor() {
         super();
-        this.initialized = false
+        this._isConnected = false
         this.addEventListener('dragstart', (e) => {
             this.drag(e)
         })
         this.progression = this.getAttribute('progression') ?? 0
+        console.warn(this.progression)
+        this.status = this.dataset.status
     }
 
     connectedCallback() {
+        this._isConnected = true
         this.id = this.getAttribute('ticket')
         this.progressBar = this.querySelector('progress-bar') ?? null
     }
 
+
     attributeChangedCallback(name, oldValue, newValue) {
-        if(name === 'progression') {
-            if(newValue < 30) {
-                this.dataset.stade = 'start'
+        if(this._isConnected) {
+            if (name === 'progression') {
+
+                let stade = 'end'
+                if (newValue < 30) {
+                    stade = 'start'
+                }
+                if (newValue >= 30 && newValue < 60) {
+                    stade = 'half'
+                }
+                this.dataset.stade = stade
                 return
             }
-            if (newValue >= 30 && newValue < 60) {
-                this.dataset.stade = 'half'
-                return
+
+            this.appendOrRemoveProgressBar()
+            if (newValue !== oldValue) {
+                this.update(name, newValue, oldValue)
             }
-            this.dataset.stade = 'end'
-            return
         }
-        this.appendOrRemoveProgressBar()
-        if(this.initialized) {
-            this.update(name, newValue)
-            return
-        }
-        this.initialized = true
     }
 
     drag(e) {
         e.dataTransfer.setData("text", e.target.id);
     }
 
-    status() {
+    getStatus() {
         return this.getAttribute('data-status')
     }
 
     appendOrRemoveProgressBar() {
-        if(this.status() !== '1' && this.progressBar) {
+        if(this.getStatus() !== '1' && this.progressBar) {
             this.progressBar.remove()
             this.progression = 0
             return
         }
-        if (this.status() === '1' && null === this.progressBar) {
+        if (this.getStatus() === '1' && null === this.progressBar) {
             this.progressBar = new ProgressBar(this.id)
             this.appendChild(this.progressBar)
             this.progression = 0
         }
     }
 
-    update(param, value) {
-        const name = param.split('data-')[1]
-        switch (name) {
-            case 'status' :
-                if(value === '0') {
-                    this.updateTicketParamValue('progression', 0)
-                    this.updateTicketParamValue('developer', null)
+    update(param, value, oldValue) {
+        if(this.isConnected) {
+
+            if (param === 'dev') {
+                param = 'data-dev'
+            }
+            const name = param.split('data-')[1]
+            if (value) {
+                switch (name) {
+                    case 'status' :
+                        if (value === '0' && oldValue !== '0') {
+                            this.updateTicketParamValue('progression', 0)
+                            this.updateTicketParamValue('developer', null)
+                        }
+                        if (value === '1' && oldValue !== '1') {
+                            this.updateTicketParamValue('progression', 0)
+                            this.dataset.stade = 'start'
+                            //Todo Manage Order
+                        }
+                        this.updateTicketParamValue(name, value)
+                        break
+
+                    case 'dev' :
+                        this.updateTicketParamValue('developer', value)
+                        break;
+                    default:
+                        break
                 }
-                if(value === '1') {
-                    this.updateTicketParamValue('progression', 0)
-                    //Todo Manage Order
-                }
-                this.updateTicketParamValue(name, value)
-                break
-            default:
-                break
+            }
         }
     }
 

@@ -16,6 +16,12 @@
     flex: 1;
     background: white;
     border-radius: 10px;
+
+    .tickets {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
     &.devs {
       flex: 0.35
     }

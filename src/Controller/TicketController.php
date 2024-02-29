@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Ticket;
 use App\Form\TicketType;
 use App\Repository\TicketRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -24,10 +25,14 @@ class TicketController extends AbstractController
     }
 
     #[Route('/update/{id}/{param}/{value}', methods: ['POST'])]
-    public function update(Ticket $ticket, string $param, $value, EntityManagerInterface $manager)
+    public function update(Ticket $ticket, string $param, $value, EntityManagerInterface $manager, UserRepository $userRepository)
     {
         if($value === 'null') {
             $value = null;
+        }
+
+        if($param === 'developer' && $value) {
+            $value = $userRepository->find($value);
         }
         $setter = 'set' . ucfirst($param);
         $ticket->{$setter}($value);
