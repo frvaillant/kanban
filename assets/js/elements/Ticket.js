@@ -71,18 +71,25 @@ export default class Ticket extends HTMLElement {
                 param = 'data-dev'
             }
             const name = param.split('data-')[1]
+
             if (value) {
                 switch (name) {
                     case 'status' :
+
                         if (value === '0' && oldValue !== '0') {
                             this.updateTicketParamValue('progression', 0)
                             this.updateTicketParamValue('developer', null)
+                            this.setAttribute('progression', 0)
+                            this.setAttribute('dev', '')
+                            this.setAttribute('dev-name', '')
                         }
+
                         if (value === '1' && oldValue !== '1') {
                             this.updateTicketParamValue('progression', 0)
                             this.dataset.stade = 'start'
                             //Todo Manage Order
                         }
+
                         this.updateTicketParamValue(name, value)
                         break
 
