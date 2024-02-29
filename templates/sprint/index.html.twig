@@ -11,12 +11,14 @@
             <div class="column-name">
                 Developpeurs
             </div>
-            {% for developer in users %}
-                <div class="dev">
-                    {{ developer.name }} : <turbo-frame id="dev_{{ developer.id }}_doing">{{ developer | tickets_doing_count }}</turbo-frame>
-                </div>
+            <div class="devs">
+                {% for developer in users %}
+                    <div class="dev">
+                        {{ developer.name }} : <turbo-frame id="dev_{{ developer.id }}_doing">{{ developer | tickets_doing_count }}</turbo-frame>
+                    </div>
 
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
 
 
@@ -32,55 +34,73 @@
             >
                 Todo
             </div>
-            {% for ticket in todo %}
-                <app-ticket
-                    ticket="{{ ticket.id }}"
-                    id="ticket-{{ ticket.id }}"
-                    class="ticket todo"
-                    data-id="{{ ticket.id }}"
-                    data-status="{{ ticket.status }}"
-                    data-="{{ ticket.status }}"
-                    draggable="true"
-                    progression="0"
-                    data-stade="start"
-                >
-                    {{ ticket.name }}
-                </app-ticket>
-            {% endfor %}
+            <div class="devs">
+                <div class="dev">
+                    <div class="tickets">
+                        {% for ticket in todo %}
+                            <app-ticket
+                                    ticket="{{ ticket.id }}"
+                                    id="ticket-{{ ticket.id }}"
+                                    class="ticket todo"
+                                    data-id="{{ ticket.id }}"
+                                    data-status="{{ ticket.status }}"
+                                    data-="{{ ticket.status }}"
+                                    draggable="true"
+                                    progression="0"
+                                    data-stade="start"
+                            >
+                                {{ ticket.name }}
+                            </app-ticket>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
         </div>
         <div
                 class="column in-progress"
-                id="in-progress"
-                data-status="1"
-                data-controller="draggable"
-                data-action="dragover->draggable#allowDrop drop->draggable#ondrop dragleave->draggable#onDragLeave"
         >
             <div class="column-name">
                 In-Progress
             </div>
-            {% for ticket in in_progress %}
-                <app-ticket
-                        ticket="{{ ticket.id }}"
-                        id="ticket-{{ ticket.id }}"
-                        class="ticket in_progress"
-                        data-id="{{ ticket.id }}"
-                        draggable="true"
-                        data-status="{{ ticket.status }}"
-                        status="{{ ticket.status }}"
-                        progression="{{ ticket.progression }}"
-                        data-stade="{{ ticket.stade }}"
-                >
-                    {{ ticket.name }}  {{ ticket.developer ? ticket.developer.name : '' }}
-                    <progress-bar ticket="{{ ticket.id }}" data-progression="{{ ticket.progression ?? 0 }}"></progress-bar>
-                </app-ticket>
-            {% endfor %}
+
+            <div class="devs">
+                {% for developer in users %}
+                    <div class="dev">
+                        {{ developer.name }} : <turbo-frame id="dev_{{ developer.id }}_doing">{{ developer | tickets_doing_count }}</turbo-frame>
+                        <div
+                                class="tickets"
+                                id="in-progress-{{ developer.id }}"
+                                data-status="1"
+                                data-controller="draggable"
+                                data-action="dragover->draggable#allowDrop drop->draggable#ondrop dragleave->draggable#onDragLeave"
+                        >
+                            {% for ticket in in_progress %}
+                                <app-ticket
+                                        ticket="{{ ticket.id }}"
+                                        id="ticket-{{ ticket.id }}"
+                                        class="ticket in_progress"
+                                        data-id="{{ ticket.id }}"
+                                        draggable="true"
+                                        data-status="{{ ticket.status }}"
+                                        status="{{ ticket.status }}"
+                                        progression="{{ ticket.progression }}"
+                                        data-stade="{{ ticket.stade }}"
+                                >
+                                    {{ ticket.name }}  {{ ticket.developer ? ticket.developer.name : '' }}
+                                    <progress-bar ticket="{{ ticket.id }}" data-progression="{{ ticket.progression ?? 0 }}"></progress-bar>
+                                </app-ticket>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
         <div
-                class="column done"
-                id="done"
-                data-controller="draggable"
-                data-status="2"
-                data-action="dragover->draggable#allowDrop drop->draggable#ondrop dragleave->draggable#onDragLeave"
+            class="column done"
+            id="done"
+            data-controller="draggable"
+            data-status="2"
+            data-action="dragover->draggable#allowDrop drop->draggable#ondrop dragleave->draggable#onDragLeave"
         >
             <div
                 class="column-name"

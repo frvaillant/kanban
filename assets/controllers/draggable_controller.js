@@ -11,8 +11,6 @@ import { Controller } from '@hotwired/stimulus';
  */
 export default class extends Controller {
     connect() {
-
-
     }
 
     ondrop(e) {
@@ -24,7 +22,7 @@ export default class extends Controller {
         dropzone.style.border='none'
 
         droppedElement.setAttribute('data-status', dropzone.dataset.status)
-        droppedElement.setAttribute('progression', 0)
+        droppedElement.setAttribute('progression', '0')
         droppedElement.dataset.stade = 'start'
         e.stopPropagation()
         return false

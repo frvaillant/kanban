@@ -16,8 +16,36 @@
     flex: 1;
     background: white;
     border-radius: 10px;
+    &.devs {
+      flex: 0.35
+    }
+
+    .column-name {
+      background: #3b82f6;
+      height: 40px;
+      margin-bottom: 10px;
+    }
+    .devs {
+      display: flex;
+      flex-direction: column;
+      align-content: stretch;
+      flex: 1;
+      .dev {
+        flex: 1;
+        padding: 7px;
+        border-top: 1px solid grey;
+        .tickets {
+          height: calc(100% - 14px);
+          display: flex;
+          justify-content: space-between;
+          flex-wrap: wrap;
+        }
+      }
+    }
+
     .ticket {
-      width:calc(100% - 20px);
+      display: block;
+      width:40%;
       height: 50px;
       margin:7px 0;
       border-radius: 8px;
