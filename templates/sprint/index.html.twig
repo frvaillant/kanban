@@ -74,7 +74,7 @@
                                 data-controller="draggable"
                                 data-action="dragover->draggable#allowDrop drop->draggable#ondrop dragleave->draggable#onDragLeave"
                         >
-                            {% for ticket in in_progress %}
+                            {% for ticket in tickets[developer.name] %}
                                 <app-ticket
                                         ticket="{{ ticket.id }}"
                                         id="ticket-{{ ticket.id }}"

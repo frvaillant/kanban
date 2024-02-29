@@ -2,7 +2,6 @@ export default class ProgressBar extends HTMLElement {
 
     static observedAttributes = ["progression"];
     constructor(ticketId = null) {
-        console.log('ticket', ticketId)
         super();
         this.ticket = ticketId ?? this.getAttribute('ticket')
         this.progression = this.dataset.progression ?? 0

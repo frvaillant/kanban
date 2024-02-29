@@ -14,14 +14,17 @@ class SprintController extends AbstractController
     #[Route('/sprint', name: 'app_sprint')]
     public function index(TicketRepository $ticketRepository, UserRepository $userRepository): Response
     {
-        $todo = $ticketRepository->findBy(['status' => Ticket::STATUS_TO_DO], ['name' => 'ASC']);
-        $inProgress = $ticketRepository->findBy(['status' => Ticket::STATUS_IN_PROGRESS], ['name' => 'ASC']);
-        $done = $ticketRepository->findBy(['status' => Ticket::STATUS_DONE], ['name' => 'ASC']);
         $users   = $userRepository->findAll();
-
+        $tickets = [];
+        $todo = $ticketRepository->findBy(['status' => Ticket::STATUS_TO_DO], ['name' => 'ASC']);
+        $done = $ticketRepository->findBy(['status' => Ticket::STATUS_DONE], ['name' => 'ASC']);
+        foreach ($users as $user) {
+            $inProgress = $ticketRepository->findBy(['status' => Ticket::STATUS_IN_PROGRESS, 'developer' => $user], ['name' => 'ASC']);
+            $tickets[$user->getName()] = $inProgress;
+        }
         return $this->render('sprint/index.html.twig', [
             'todo' => $todo,
-            'in_progress' => $inProgress,
+            'tickets' => $tickets,
             'done' => $done,
             'users'   => $users,
         ]);
