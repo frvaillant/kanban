@@ -9,7 +9,7 @@
 
         <div class="column devs">
             <div class="column-name">
-                Developpeurs
+                <i class="fa-solid fa-code"></i> Developpeurs
             </div>
             <div class="devs">
                 {% for developer in users %}
@@ -25,35 +25,34 @@
 
 
         <div
-                class="column todo"
-                id="todo"
-                data-status="0"
-
+            class="column todo"
+            id="todo"
+            data-status="0"
         >
             <div class="column-name">
-                Todo
+                <i class="fa-solid fa-clipboard-list"></i> Todo
             </div>
 
             <div
-                    class="tickets"
-                    data-controller="draggable"
-                    data-status="0"
-                    data-action="dragover->draggable#allowDrop drop->draggable#ondrop dragleave->draggable#onDragLeave"
+                class="tickets"
+                data-controller="draggable"
+                data-status="0"
+                data-action="dragover->draggable#allowDrop drop->draggable#ondrop dragleave->draggable#onDragLeave"
             >
                 {% for ticket in todo %}
                     <app-ticket
-                            ticket="{{ ticket.id }}"
-                            id="ticket-{{ ticket.id }}"
-                            class="ticket todo"
-                            data-id="{{ ticket.id }}"
-                            data-status="{{ ticket.status }}"
-                            data-="{{ ticket.status }}"
-                            draggable="true"
-                            progression="0"
-                            data-stade="start"
-                            dev=""
-                            dev-name=""
-                            description="{{ ticket.description }}"
+                        ticket="{{ ticket.id }}"
+                        id="ticket-{{ ticket.id }}"
+                        class="ticket todo"
+                        data-id="{{ ticket.id }}"
+                        data-status="{{ ticket.status }}"
+                        data-="{{ ticket.status }}"
+                        draggable="true"
+                        progression="0"
+                        data-stade="start"
+                        dev=""
+                        dev-name=""
+                        description="{{ ticket.description }}"
 
                     >
                         <span class="ticket-name">
@@ -69,7 +68,7 @@
                 class="column in-progress"
         >
             <div class="column-name">
-                In-Progress
+                <i class="fa-solid fa-gears"></i> In-Progress
             </div>
 
             <div class="devs">
@@ -122,7 +121,20 @@
             <div
                 class="column-name"
             >
-                Done
+                <span>
+                    <i class="fa-solid fa-clipboard-check"></i> Done
+                </span>
+                <span>
+                    <span
+                            class="as-link"
+                            data-controller="tooltip"
+                            data-tooltip='{% include 'sprint/_done_menu.html.twig' | e('html') %}'
+                            data-interactive="1"
+                            data-trigger="click"
+                    >
+                        <i class="fa-solid fa-ellipsis"></i>
+                    </span>
+                </span>
             </div>
             <div
                 class="tickets"
@@ -133,17 +145,17 @@
             >
             {% for ticket in done %}
                 <app-ticket
-                        ticket="{{ ticket.id }}"
-                        id="ticket-{{ ticket.id }}"
-                        class="ticket done"
-                        data-id="{{ ticket.id }}"
-                        draggable="true"
-                        data-status="{{ ticket.status }}"
-                        status="{{ ticket.status }}"
-                        progression="100"
-                        dev=""
-                        dev-name=""
-                        description="{{ ticket.description }}"
+                    ticket="{{ ticket.id }}"
+                    id="ticket-{{ ticket.id }}"
+                    class="ticket done"
+                    data-id="{{ ticket.id }}"
+                    draggable="true"
+                    data-status="{{ ticket.status }}"
+                    status="{{ ticket.status }}"
+                    progression="100"
+                    dev=""
+                    dev-name=""
+                    description="{{ ticket.description }}"
 
                 >
                     <span class="ticket-name">

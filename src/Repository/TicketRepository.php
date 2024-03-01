@@ -21,6 +21,19 @@ class TicketRepository extends ServiceEntityRepository
         parent::__construct($registry, Ticket::class);
     }
 
+    public function deleteDoneTickets(): void
+    {
+        $qb = $this->createQueryBuilder('t');
+        $q = $qb
+                ->update()
+                ->set('t.status', ':new')
+                ->setParameter('new', Ticket::STATUS_DELETED)
+                ->where('t.status = :old')
+                ->setParameter('old', Ticket::STATUS_DONE)
+                ->getQuery();
+        $q->execute();
+    }
+
 //    /**
 //     * @return Ticket[] Returns an array of Ticket objects
 //     */

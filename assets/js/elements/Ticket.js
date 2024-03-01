@@ -24,13 +24,13 @@ export default class Ticket extends HTMLElement {
         tippy(this.querySelector('.ticket-name'), {
             placement: 'top',
             content: this.getAttribute('description'),
-            theme: 'light'
+            theme: 'light-border'
         })
 
         tippy(this.querySelector('.ticket-name'), {
             placement: 'bottom',
             content: this.getAttribute('jira'),
-            theme: 'light',
+            theme: 'light-border',
             trigger: 'click',
             allowHTML: true,
             interactive: true
@@ -107,6 +107,10 @@ export default class Ticket extends HTMLElement {
                         if (value === '1' && oldValue !== '1') {
                             this.updateTicketParamValue('progression', 0)
                             this.dataset.stade = 'start'
+
+                            if(oldValue === '2') {
+                                this.setAttribute('progression', 0)
+                            }
                             //Todo Manage Order
                         }
 

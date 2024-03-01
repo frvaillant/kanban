@@ -1,9 +1,20 @@
+$theme-color: #00bcd4;
+
 body {
   font-family: Arial, sans-serif;
-  background: gold;
+  background: $theme-color;
   margin: 0;
   overflow-x: hidden;
 }
+
+.as-link {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 @import "tippy.js/dist/tippy.css";
 @import 'tippy.js/themes/light.css';
+@import 'tippy.js/themes/light-border.css';
 @import 'sprint';
+@import 'tippy';

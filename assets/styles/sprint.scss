@@ -14,7 +14,7 @@
     height: calc(100% - 80px);
     overflow-y: auto;
     flex: 1;
-    background: #242424;
+    background: linear-gradient(155deg, #242424, #040404 98%);
     border-radius: 10px;
     box-shadow: 3px 5px 10px rgba(0,0,0,0.8);
     .tickets {
@@ -33,6 +33,20 @@
     &.todo, &.done {
       .tickets {
         height: 100%;
+      }
+    }
+
+    &.done {
+      .column-name {
+        display:flex;
+        justify-content: space-between;
+        span {
+          a {
+            &:not(.menu-link) {
+              color: white;
+            }
+          }
+        }
       }
     }
     &.devs {
@@ -61,7 +75,7 @@
         position:relative;
         .dev-name {
           position: absolute;
-          color: gold;
+          color: $theme-color;
           top: -15px;
           right: 0;
           font-size: 14px;

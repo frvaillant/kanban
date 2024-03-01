@@ -1,0 +1,28 @@
+.tippy-content {
+  ul {
+    padding: 5px;
+    li {
+      list-style: none;
+      margin-bottom: 5px;
+      url-launcher {
+        color: black;
+        text-decoration: none;
+        &:hover {
+          color: $theme-color;
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
+      a {
+        &.menu-link {
+          color: black;
+          text-decoration: none;
+          &:hover {
+            color: $theme-color
+            c
+          }
+        }
+      }
+    }
+  }
+}

@@ -37,9 +37,6 @@ class Ticket
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
 
-    #[ORM\Column]
-    private ?int $showOrder = null;
-
     #[ORM\Column(length: 500, nullable: true)]
     private ?string $description = null;
 
@@ -117,18 +114,6 @@ class Ticket
     public function setUpdatedAt(): static
     {
         $this->updatedAt = new \DateTime();
-
-        return $this;
-    }
-
-    public function getShowOrder(): ?int
-    {
-        return $this->showOrder;
-    }
-
-    public function setShowOrder(int $showOrder): static
-    {
-        $this->showOrder = $showOrder;
 
         return $this;
     }

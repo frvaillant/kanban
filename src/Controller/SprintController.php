@@ -6,6 +6,7 @@ use App\Entity\Ticket;
 use App\Repository\TicketRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -29,5 +30,12 @@ class SprintController extends AbstractController
             'done' => $done,
             'users'   => $users,
         ]);
+    }
+
+    #[Route('/sprint/close', name: 'close_sprint', methods: ['POST'])]
+    public function closeSprint(TicketRepository $ticketRepository): JsonResponse
+    {
+        $ticketRepository->deleteDoneTickets();
+        return new JsonResponse([], Response::HTTP_OK);
     }
 }
