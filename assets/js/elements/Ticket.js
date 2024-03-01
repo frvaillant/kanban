@@ -41,8 +41,22 @@ export default class Ticket extends HTMLElement {
 
     }
 
+    sendMessage() {
+        const ws = new WebSocket("ws://localhost:5580/");
+        ws.onopen = function(event) {
+            const message = {
+                'sentBy'  : document.body.dataset.user,
+                'message' : 'ticket ' + this.id + ' has been changed'
+            }
+            ws.send(JSON.stringify(message));
+            ws.close();
+        };
+    }
 
     attributeChangedCallback(name, oldValue, newValue) {
+
+        this.sendMessage()
+
         if(this._isConnected) {
             if (name === 'progression') {
 

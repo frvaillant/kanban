@@ -14,7 +14,7 @@
 {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
-    <body>
+    <body data-user="{{ random(1, 1000) }}">
         {% block body %}{% endblock %}
     </body>
 </html>
