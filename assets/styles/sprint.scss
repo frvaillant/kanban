@@ -68,6 +68,15 @@
         }
 
         .dev-counter {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 40px;
+          width: 40px;
+          border-radius: 5px;
+          background: black;
+          font-size: 20px;
+          font-weight: bold;
           color:white;
         }
 
@@ -125,7 +134,7 @@
         }
       }
       &[data-status="2"] {
-        background: green;
+        background: forestgreen;
       }
 
       progress-bar {
