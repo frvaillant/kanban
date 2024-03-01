@@ -95,10 +95,11 @@ class Ticket
 
     public function getStade()
     {
-        if(!$this->progression || $this->progression === 0) {
+        if(!$this->progression || $this->progression < 40) {
             return 'start';
         }
-        if ($this->progression >= 30 && $this->progression < 60) {
+
+        if ($this->progression < 70) {
             return 'half';
         }
         return 'end';
