@@ -16,15 +16,19 @@
     flex: 1;
     background: #242424;
     border-radius: 10px;
-
+    box-shadow: 3px 5px 10px rgba(0,0,0,0.8);
     .tickets {
       display: flex;
-      justify-content: space-between;
+      justify-content: start;
       flex-wrap: wrap;
       padding:7px;
       min-height: 35px;
       align-content: start;
       gap: 15px;
+      border-radius: 10px;
+      &.dragover {
+        box-shadow: 0 0 10px rgba(255,255,255,0.5);
+      }
     }
     &.todo, &.done {
       .tickets {
@@ -82,7 +86,7 @@
 
         .tickets {
           display: flex;
-          justify-content: space-between;
+          justify-content: start;
           flex-wrap: wrap;
         }
       }
@@ -92,7 +96,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      width:40%;
+      width:25%;
       border-radius: 8px;
       background: #FFF;
       padding:10px;

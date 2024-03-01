@@ -11,7 +11,8 @@ export default class extends Controller {
         const droppedElement = document.getElementById(id);
         const dropzone = e.currentTarget;
         dropzone.appendChild(droppedElement)
-        dropzone.style.border='none'
+        dropzone.classList.remove('dragover')
+
 
         const dev = dropzone.dataset.dev
         const devName = dropzone.dataset.name
@@ -46,11 +47,13 @@ export default class extends Controller {
 
     onDragLeave(e) {
         e.currentTarget.style.border='none'
+        e.currentTarget.classList.remove('dragover')
+
     }
 
     allowDrop(e) {
         e.preventDefault();
-        e.currentTarget.style.border='1px solid red'
+        e.currentTarget.classList.add('dragover')
     }
 
     reconnect(displaced) {
