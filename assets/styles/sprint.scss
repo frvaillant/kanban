@@ -14,34 +14,55 @@
     height: calc(100% - 80px);
     overflow-y: auto;
     flex: 1;
-    background: white;
+    background: #242424;
     border-radius: 10px;
 
     .tickets {
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
+      padding:7px;
+      min-height: 35px;
     }
     &.devs {
       flex: 0.35
     }
 
     .column-name {
-      background: #3b82f6;
       height: 40px;
       margin-bottom: 10px;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
     }
     .devs {
       display: flex;
       flex-direction: column;
       align-content: stretch;
       flex: 1;
+      gap: 20px;
       .dev {
         flex: 1;
-        padding: 7px;
-        border-top: 1px solid grey;
+        display: block;
+        background: rgba(0,0,0,0.3);
+        padding: 10px;
+        border-radius: 10px;
+        position:relative;
+        .dev-name {
+          position: absolute;
+          color: gold;
+          top:5px;
+          right: 10px;
+          font-size: 14px;
+          border-radius:10px;
+          text-align: right;
+        }
+
+        .dev-counter {
+          color:white;
+        }
+
         .tickets {
-          height: calc(100% - 14px);
           display: flex;
           justify-content: space-between;
           flex-wrap: wrap;
@@ -50,27 +71,51 @@
     }
 
     .ticket {
-      display: block;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       width:40%;
-      height: 50px;
-      margin:7px 0;
       border-radius: 8px;
-      background: #F3F3F3;
+      background: #FFF;
       padding:10px;
+      position: relative;
+      .ticket-name {
+        width: max-content;
+        background: rgba(0,0,0,0.7);
+        padding: 3px;
+        border-radius: 4px;
+        font-size: 14px;
+        color:white;
+        font-weight: bold;
+      }
+      &:after {
+        display: block;
+        background: black;
+        color: white;
+        border-radius: 200px;
+        padding: 4px 6px;
+        top:4px;
+        margin-bottom: 5px;
+        right: 4px;
+        content: attr(progression)' %';
+        position: absolute;
+        font-size: 10px;
+      }
+
       &[data-status="0"] {
-        background: #F3F3F3;
+        background: #FFF;
       }
       &[data-status="1"] {
-        background: #B0413E;
+        background: lightgreen;
         &[data-stade="half"] {
-          background: darkorange;
+          background: seagreen;
         }
         &[data-stade="end"] {
-          background: gold;
+          background: yellowgreen;
         }
       }
       &[data-status="2"] {
-        background: yellowgreen;
+        background: green;
       }
 
       progress-bar {
@@ -80,6 +125,7 @@
         background: black;
         border-radius: 200px;
         position:relative;
+        margin-top:4px;
         .progression {
           display: block;
           background: white;

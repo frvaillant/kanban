@@ -9,6 +9,7 @@ export default class ProgressBar extends HTMLElement {
         this.progressionElement = document.createElement('div')
         this.progressionElement.classList.add('progression')
         this.progressionElement.style.width = this.progression + '%'
+        this.progressionElement.dataset.progression = this.progression
         this.appendChild(this.progressionElement)
 
         this.addEventListener('click', (e) => {
@@ -27,9 +28,11 @@ export default class ProgressBar extends HTMLElement {
 
     updateProgression(e) {
         const realPosition = e.clientX - this.getBoundingClientRect().left
-        this.progression = realPosition * 100 / this.getBoundingClientRect().width
+        this.progression = Math.floor(realPosition * 100 / this.getBoundingClientRect().width)
         this.parentElement.setAttribute('progression', this.progression)
         this.setAttribute('progression', this.progression)
+        this.progressionElement.dataset.progression = this.progression
+
     }
 
     updateTicketValue(name, value) {
@@ -40,10 +43,6 @@ export default class ProgressBar extends HTMLElement {
                 //Todo Toast
             }
         })
-    }
-
-    getMousePosition() {
-
     }
 
 }

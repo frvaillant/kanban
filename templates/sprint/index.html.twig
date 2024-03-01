@@ -14,7 +14,9 @@
             <div class="devs">
                 {% for developer in users %}
                     <div class="dev dev-in-list" dev="{{ developer.id }}" >
-                        {{ developer.name }} :
+                        <span class="dev-name">
+                            {{ developer.name }}
+                        </span>
                         <div class="dev-counter" id="dev_{{ developer.id }}_doing">{{ developer | tickets_doing_count }}</div>
                     </div>
                 {% endfor %}
@@ -26,14 +28,18 @@
                 class="column todo"
                 id="todo"
                 data-status="0"
-                data-controller="draggable"
-                data-action="dragover->draggable#allowDrop drop->draggable#ondrop dragleave->draggable#onDragLeave"
+
         >
             <div class="column-name">
                 Todo
             </div>
 
-            <div class="tickets">
+            <div
+                    class="tickets"
+                    data-controller="draggable"
+                    data-status="0"
+                    data-action="dragover->draggable#allowDrop drop->draggable#ondrop dragleave->draggable#onDragLeave"
+            >
                 {% for ticket in todo %}
                     <app-ticket
                             ticket="{{ ticket.id }}"
@@ -47,6 +53,7 @@
                             data-stade="start"
                             dev=""
                             dev-name=""
+
                     >
                         {{ ticket.name }}
                     </app-ticket>
@@ -65,7 +72,9 @@
             <div class="devs">
                 {% for developer in users %}
                     <div class="dev">
-                        {{ developer.name }}
+                        <span class="dev-name">
+                            {{ developer.name }}
+                        </span>
                         <div
                                 class="tickets"
                                 id="in-progress-{{ developer.id }}"
@@ -93,7 +102,6 @@
                                         {{ ticket.name }}
                                     </span>
                                     <dev-name dev="{{ ticket.developer ? ticket.developer.id : '' }}" name="{{ ticket.developer ? ticket.developer.name : '' }}">
-                                        {{ ticket.developer ? ticket.developer.name : '' }}
                                     </dev-name>
                                     <progress-bar ticket="{{ ticket.id }}" data-progression="{{ ticket.progression ?? 0 }}"></progress-bar>
                                 </app-ticket>

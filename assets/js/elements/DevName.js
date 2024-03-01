@@ -15,7 +15,6 @@ export default class DevName extends HTMLElement {
 
     attributeChangedCallback(name, oldValue, newValue) {
 
-        this.innerHTML = newValue
     }
 
 }

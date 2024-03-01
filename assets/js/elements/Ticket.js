@@ -10,7 +10,6 @@ export default class Ticket extends HTMLElement {
             this.drag(e)
         })
         this.progression = this.getAttribute('progression') ?? 0
-        console.warn(this.progression)
         this.status = this.dataset.status
     }
 
@@ -26,10 +25,10 @@ export default class Ticket extends HTMLElement {
             if (name === 'progression') {
 
                 let stade = 'end'
-                if (newValue < 30) {
+                if (newValue < 40) {
                     stade = 'start'
                 }
-                if (newValue >= 30 && newValue < 60) {
+                if (newValue >= 40 && newValue < 70) {
                     stade = 'half'
                 }
                 this.dataset.stade = stade
@@ -82,6 +81,7 @@ export default class Ticket extends HTMLElement {
                             this.setAttribute('progression', 0)
                             this.setAttribute('dev', '')
                             this.setAttribute('dev-name', '')
+                            this.querySelector('dev-name')?.remove()
                         }
 
                         if (value === '1' && oldValue !== '1') {
