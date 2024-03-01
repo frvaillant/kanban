@@ -23,6 +23,8 @@
       flex-wrap: wrap;
       padding:7px;
       min-height: 35px;
+      align-content: start;
+      gap: 15px;
     }
     &.todo, &.done {
       .tickets {
@@ -50,17 +52,19 @@
         flex: 1;
         display: block;
         background: rgba(0,0,0,0.3);
-        padding: 10px;
+        padding: 18px 10px;
         border-radius: 10px;
         position:relative;
         .dev-name {
           position: absolute;
           color: gold;
-          top:5px;
-          right: 10px;
+          top: -15px;
+          right: 0;
           font-size: 14px;
-          border-radius:10px;
+          border-radius: 10px 10px 0;
           text-align: right;
+          background: black;
+          padding: 7px;
         }
 
         .dev-counter {
@@ -112,9 +116,9 @@
         background: #FFF;
       }
       &[data-status="1"] {
-        background: lightgreen;
+        background: orangered;
         &[data-stade="half"] {
-          background: seagreen;
+          background: gold;
         }
         &[data-stade="end"] {
           background: yellowgreen;
