@@ -20,7 +20,8 @@ export default class Ticket extends HTMLElement {
         this.progressBar = this.querySelector('progress-bar') ?? null
         tippy(this.querySelector('.ticket-name'), {
             placement: 'top',
-            content: this.getAttribute('description')
+            content: this.getAttribute('description'),
+            theme: 'light'
         })
     }
 
