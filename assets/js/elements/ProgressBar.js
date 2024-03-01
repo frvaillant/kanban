@@ -29,6 +29,7 @@ export default class ProgressBar extends HTMLElement {
     updateProgression(e) {
         const realPosition = e.clientX - this.getBoundingClientRect().left
         this.progression = Math.floor(realPosition * 100 / this.getBoundingClientRect().width)
+        this.progression = Math.round(this.progression / 5) * 5;
         this.parentElement.setAttribute('progression', this.progression)
         this.setAttribute('progression', this.progression)
         this.progressionElement.dataset.progression = this.progression
