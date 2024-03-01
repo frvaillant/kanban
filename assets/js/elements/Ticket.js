@@ -1,4 +1,5 @@
 import ProgressBar from "./ProgressBar";
+import tippy from "tippy.js";
 
 export default class Ticket extends HTMLElement {
 
@@ -17,6 +18,10 @@ export default class Ticket extends HTMLElement {
         this._isConnected = true
         this.id = this.getAttribute('ticket')
         this.progressBar = this.querySelector('progress-bar') ?? null
+        tippy(this.querySelector('.ticket-name'), {
+            placement: 'top',
+            content: this.getAttribute('description')
+        })
     }
 
 

@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "@hotwired/stimulus": "^3.2.2",
-        "@hotwired/stimulus-webpack-helpers": "^1.0.1"
+        "@hotwired/stimulus-webpack-helpers": "^1.0.1",
+        "tippy.js": "^6.3.7"
     }
 }

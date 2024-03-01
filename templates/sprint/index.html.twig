@@ -53,9 +53,12 @@
                             data-stade="start"
                             dev=""
                             dev-name=""
+                            description="{{ ticket.description }}"
 
                     >
+                        <span class="ticket-name">
                         {{ ticket.name }}
+                    </span>
                     </app-ticket>
                 {% endfor %}
             </div>
@@ -97,6 +100,8 @@
                                         data-stade="{{ ticket.stade }}"
                                         dev="{{ ticket.developer ? ticket.developer.id : '' }}"
                                         dev-name="{{ ticket.developer ? ticket.developer.name : '' }}"
+                                        description="{{ ticket.description }}"
+
                                 >
                                     <span class="ticket-name">
                                         {{ ticket.name }}
@@ -135,6 +140,8 @@
                         progression="100"
                         dev=""
                         dev-name=""
+                        description="{{ ticket.description }}"
+
                 >
                     <span class="ticket-name">
                         {{ ticket.name }}
