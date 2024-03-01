@@ -93,7 +93,7 @@ class Ticket
         return $this;
     }
 
-    public function getStade()
+    public function getStade(): string
     {
         if(!$this->progression || $this->progression < 40) {
             return 'start';
