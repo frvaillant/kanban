@@ -118,16 +118,19 @@
         </div>
         <div
             class="column done"
-            id="done"
-            data-controller="draggable"
-            data-status="2"
-            data-action="dragover->draggable#allowDrop drop->draggable#ondrop dragleave->draggable#onDragLeave"
         >
             <div
                 class="column-name"
             >
                 Done
             </div>
+            <div
+                class="tickets"
+                id="done"
+                data-controller="draggable"
+                data-status="2"
+                data-action="dragover->draggable#allowDrop drop->draggable#ondrop dragleave->draggable#onDragLeave"
+            >
             {% for ticket in done %}
                 <app-ticket
                         ticket="{{ ticket.id }}"
@@ -148,6 +151,7 @@
                     </span>
                 </app-ticket>
             {% endfor %}
+            </div>
         </div>
 
     </div>

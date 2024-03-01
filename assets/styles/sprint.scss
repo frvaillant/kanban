@@ -24,6 +24,11 @@
       padding:7px;
       min-height: 35px;
     }
+    &.todo, &.done {
+      .tickets {
+        height: 100%;
+      }
+    }
     &.devs {
       flex: 0.35
     }
@@ -79,6 +84,7 @@
       background: #FFF;
       padding:10px;
       position: relative;
+      height: max-content;
       .ticket-name {
         width: max-content;
         background: rgba(0,0,0,0.7);

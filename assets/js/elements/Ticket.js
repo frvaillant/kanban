@@ -18,11 +18,25 @@ export default class Ticket extends HTMLElement {
         this._isConnected = true
         this.id = this.getAttribute('ticket')
         this.progressBar = this.querySelector('progress-bar') ?? null
+
+        this.setAttribute('jira', '<a href=\'#\'>Lien Jira</a>')
+
         tippy(this.querySelector('.ticket-name'), {
             placement: 'top',
             content: this.getAttribute('description'),
             theme: 'light'
         })
+
+        tippy(this.querySelector('.ticket-name'), {
+            placement: 'bottom',
+            content: this.getAttribute('jira'),
+            theme: 'light',
+            trigger: 'click',
+            allowHTML: true,
+            interactive: true
+
+        })
+
     }
 
 
