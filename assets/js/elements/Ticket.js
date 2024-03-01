@@ -24,7 +24,8 @@ export default class Ticket extends HTMLElement {
         tippy(this.querySelector('.ticket-name'), {
             placement: 'top',
             content: this.getAttribute('description'),
-            theme: 'light-border'
+            theme: 'light-border',
+            animation: 'scale'
         })
 
         tippy(this.querySelector('.ticket-name'), {
@@ -33,7 +34,8 @@ export default class Ticket extends HTMLElement {
             theme: 'light-border',
             trigger: 'click',
             allowHTML: true,
-            interactive: true
+            interactive: true,
+            animation: 'scale'
 
         })
 

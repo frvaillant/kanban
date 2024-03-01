@@ -12,7 +12,8 @@ export default class extends Controller {
             theme: dataset.theme ?? 'light-border',
             trigger: dataset.trigger ?? 'click',
             allowHTML: true,
-            interactive: dataset.interactive ? dataset.interactive === '1' : false
+            interactive: dataset.interactive ? dataset.interactive === '1' : false,
+            animation: 'scale'
         })
     }
 }
