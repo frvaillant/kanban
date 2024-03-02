@@ -41,12 +41,16 @@ export default class Ticket extends HTMLElement {
 
     }
 
-    sendMessage() {
+    sendMessage(param, oldValue, newValue) {
         const ws = new WebSocket("ws://localhost:5580/");
+        const $this = this
         ws.onopen = function(event) {
             const message = {
                 'sentBy'  : document.body.dataset.user,
-                'message' : 'ticket ' + this.id + ' has been changed'
+                'ticket' : $this.getAttribute('ticket'),
+                'param' : param,
+                'oldValue' : oldValue,
+                'newValue' : newValue
             }
             ws.send(JSON.stringify(message));
             ws.close();
@@ -55,11 +59,10 @@ export default class Ticket extends HTMLElement {
 
     attributeChangedCallback(name, oldValue, newValue) {
 
-        this.sendMessage()
-
         if(this._isConnected) {
-            if (name === 'progression') {
+            this.sendMessage(name, oldValue, newValue)
 
+            if (name === 'progression') {
                 let stade = 'end'
                 if (newValue < 40) {
                     stade = 'start'
@@ -73,6 +76,8 @@ export default class Ticket extends HTMLElement {
 
             this.appendOrRemoveProgressBar()
             if (newValue !== oldValue) {
+                console.log('values diff')
+                this.sendMessage(name, oldValue, newValue)
                 this.update(name, newValue, oldValue)
             }
         }

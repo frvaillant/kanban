@@ -13,7 +13,10 @@ const ws = new WebSocket("ws://localhost:5580/");
 ws.onmessage = (e) => {
     const message = JSON.parse(e.data)
     if(message.sentBy !== document.body.dataset.user) {
-        alert(message)
+        // do action
+        setTimeout(() => {
+            window.location.reload()
+        }, 500)
     }
 }
 
